@@ -19,4 +19,13 @@ object AppConstants {
         }
     }
 
+
+    @StringDef(SharedPreference.SHARED_PREFERENCE_NAME,SharedPreference.LOCALIZATION_KEY_NAME)
+    annotation class SharedPreference {
+        companion object {
+            const val SHARED_PREFERENCE_NAME = "BaseProject"
+            const val LOCALIZATION_KEY_NAME = "lang"
+        }
+    }
+
 }

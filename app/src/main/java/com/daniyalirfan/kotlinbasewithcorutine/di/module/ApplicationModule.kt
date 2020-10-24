@@ -3,8 +3,8 @@ package com.daniyalirfan.kotlinbasewithcorutine.di.module
 import android.content.Context
 import com.daniyalirfan.kotlinbasewithcorutine.BuildConfig
 import com.daniyalirfan.kotlinbasewithcorutine.constants.AppConstants
-import com.daniyalirfan.kotlinbasewithcorutine.data.local.AppDao
-import com.daniyalirfan.kotlinbasewithcorutine.data.local.AppDatabase
+import com.daniyalirfan.kotlinbasewithcorutine.data.local.db.AppDao
+import com.daniyalirfan.kotlinbasewithcorutine.data.local.db.AppDatabase
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.ApiService
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainRepository
 import com.google.gson.Gson

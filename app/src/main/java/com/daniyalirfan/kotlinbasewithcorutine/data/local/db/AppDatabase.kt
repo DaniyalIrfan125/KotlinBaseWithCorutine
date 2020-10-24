@@ -1,4 +1,4 @@
-package com.daniyalirfan.kotlinbasewithcorutine.data.local
+package com.daniyalirfan.kotlinbasewithcorutine.data.local.db
 
 import android.content.Context
 import androidx.room.Database
@@ -16,7 +16,12 @@ abstract class AppDatabase : RoomDatabase(){
         @Volatile private var instance: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase =
-            instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
+            instance
+                ?: synchronized(this) { instance
+                    ?: buildDatabase(
+                        context
+                    )
+                        .also { instance = it } }
 
         private fun buildDatabase(appContext: Context) =
             Room.databaseBuilder(appContext, AppDatabase::class.java, AppConstants.DbConfiguration.DB_NAME)

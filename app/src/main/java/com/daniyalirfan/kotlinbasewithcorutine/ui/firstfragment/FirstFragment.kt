@@ -80,7 +80,6 @@ class FirstFragment : BaseFragment() {
                 }
                 Resource.Status.LOADING -> {
                     showProgressBar()
-
                 }
                 Resource.Status.ERROR -> {
                     hideProgressBar()
