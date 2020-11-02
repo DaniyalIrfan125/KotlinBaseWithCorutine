@@ -7,8 +7,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.assessment.justcleandaniyal.data.models.PostsResponseItem
 import com.daniyalirfan.kotlinbasewithcorutine.R
+import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponseItem
 
 
 class PostsRecyclerAdapter(

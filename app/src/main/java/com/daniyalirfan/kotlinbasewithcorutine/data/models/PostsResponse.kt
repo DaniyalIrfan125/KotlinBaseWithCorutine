@@ -1,4 +1,4 @@
-package com.assessment.justcleandaniyal.data.models
+package com.daniyalirfan.kotlinbasewithcorutine.data.models
 
 class PostsResponse : ArrayList<PostsResponseItem>()
 

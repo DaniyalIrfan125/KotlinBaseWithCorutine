@@ -1,4 +1,5 @@
-package com.assessment.justcleandaniyal.data.models
+package com.daniyalirfan.kotlinbasewithcorutine.data.models
+
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

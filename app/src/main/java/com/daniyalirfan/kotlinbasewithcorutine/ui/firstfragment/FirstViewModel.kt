@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.assessment.justcleandaniyal.data.models.PostsResponse
+import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponse
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainRepository
 import com.daniyalirfan.kotlinbasewithcorutine.utils.NetworkHelper

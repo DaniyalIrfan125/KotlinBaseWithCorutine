@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.assessment.justcleandaniyal.data.models.PostsResponseItem
 import com.daniyalirfan.kotlinbasewithcorutine.constants.AppConstants
+import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponseItem
+
 
 @Database(entities = [PostsResponseItem::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase(){
