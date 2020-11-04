@@ -20,11 +20,12 @@ object AppConstants {
     }
 
 
-    @StringDef(SharedPreference.SHARED_PREFERENCE_NAME,SharedPreference.LOCALIZATION_KEY_NAME)
-    annotation class SharedPreference {
+    @StringDef(DataStore.DATA_STORE_NAME,DataStore.LOCALIZATION_KEY_NAME,DataStore.USER_NAME_KEY)
+    annotation class DataStore {
         companion object {
-            const val SHARED_PREFERENCE_NAME = "BaseProject"
+            const val DATA_STORE_NAME = "BaseProject"
             const val LOCALIZATION_KEY_NAME = "lang"
+            const val USER_NAME_KEY = "user_name_key"
         }
     }
 

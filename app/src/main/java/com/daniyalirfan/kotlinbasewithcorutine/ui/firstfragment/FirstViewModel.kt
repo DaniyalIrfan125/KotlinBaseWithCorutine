@@ -19,11 +19,11 @@ class FirstViewModel @ViewModelInject constructor(
 
 
     private val _posts = MutableLiveData<Resource<PostsResponse>>()
-    val users: LiveData<Resource<PostsResponse>>
+    val postsData: LiveData<Resource<PostsResponse>>
         get() = _posts
 
 
-    fun fetchPosts() {
+    fun fetchPostsFromApi() {
         viewModelScope.launch {
             _posts.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
