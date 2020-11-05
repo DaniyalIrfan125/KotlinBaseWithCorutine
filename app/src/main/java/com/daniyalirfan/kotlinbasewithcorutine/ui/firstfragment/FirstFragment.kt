@@ -7,76 +7,91 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.daniyalirfan.kotlinbasewithcorutine.BR
 import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseFragment
 import com.daniyalirfan.kotlinbasewithcorutine.data.local.datastore.DataStoreProvider
 import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponseItem
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
+import com.daniyalirfan.kotlinbasewithcorutine.databinding.FirstFragmentBinding
 import com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.adapter.PostsRecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.first_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FirstFragment : BaseFragment() {
+class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
-    private lateinit var viewModel: FirstViewModel
+    override val layoutId: Int
+        get() = R.layout.first_fragment
+    override val viewModel: Class<FirstViewModel>
+        get() = FirstViewModel::class.java
+    override val bindingVariable: Int
+        get() = BR.viewModel
+
     private lateinit var adapter: PostsRecyclerAdapter
-    private var mView: View? = null
     private var postsList: ArrayList<PostsResponseItem> = ArrayList()
-    private var recycler_posts: RecyclerView? = null
     lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FirstViewModel::class.java)
-
 
         //Get reference to our Data Store Provider class
         dataStoreProvider = DataStoreProvider(requireContext())
 
 
-        subscribeToNetworkLiveData()
         subscribeToObserveDataStore()
 
         //calling api
-        viewModel.fetchPostsFromApi()
+        mViewModel.fetchPostsFromApi()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initialising()
+    }
+
+    override fun subscribeToViewLiveData() {
+        super.subscribeToViewLiveData()
+
+        mViewModel.btnClick.observe(this, Observer {
+
+            //observing data from edittext
+            mViewModel.myedittext.get()?.let {
+
+                //setting data to textview
+                mViewModel.myName.set(it)
+
+                //saving data to data store
+                //Stores the values
+                GlobalScope.launch {
+                    dataStoreProvider.storeData(false,it)
+                }
+            }
+        })
     }
 
     private fun subscribeToObserveDataStore() {
 
+        //observing data from data store and showing
         dataStoreProvider.userNameFlow.asLiveData().observe(this, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            mViewModel.myName.set(it)
         })
 
-        //saving data to data store
-
-        //Stores the values
-        GlobalScope.launch {
-            dataStoreProvider.storeData(false,"daniyal testing")
-        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mView = inflater.inflate(R.layout.first_fragment, container, false)
-
-        initialising()
-        return mView
-    }
 
     private fun initialising() {
-        recycler_posts = mView!!.findViewById(R.id.recycler_posts)
-
 
         adapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
             override fun onClicked(position: Int) {
@@ -88,14 +103,16 @@ class FirstFragment : BaseFragment() {
 
         })
 
-        recycler_posts!!.layoutManager = LinearLayoutManager(requireContext())
-        recycler_posts!!.adapter = adapter
+        recycler_posts.layoutManager = LinearLayoutManager(requireContext())
+        recycler_posts.adapter = adapter
+
     }
 
+    //subscribing to network live data
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
 
-        viewModel.postsData.observe(this, Observer {
+        mViewModel.postsData.observe(this, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     hideProgressBar()
