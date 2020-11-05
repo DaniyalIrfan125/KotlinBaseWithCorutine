@@ -9,5 +9,13 @@
         android:id="@+id/firstFragment"
         android:name="com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.FirstFragment"
         android:label="first_fragment"
-        tools:layout="@layout/first_fragment" />
+        tools:layout="@layout/first_fragment" >
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.daniyalirfan.kotlinbasewithcorutine.ui.secondfragment.SecondFragment"
+        android:label="SecondFragment" />
 </navigation>

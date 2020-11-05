@@ -75,7 +75,7 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
                 //saving data to data store
                 //Stores the values
                 GlobalScope.launch {
-                    dataStoreProvider.storeData(false,it)
+                    dataStoreProvider.storeData(false, it)
                 }
             }
         })
@@ -95,7 +95,8 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
         adapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
             override fun onClicked(position: Int) {
-
+                Navigation.findNavController(recycler_posts)
+                    .navigate(R.id.action_firstFragment_to_secondFragment)
             }
 
             override fun onProductLiked(position: Int, isLiked: Boolean) {
