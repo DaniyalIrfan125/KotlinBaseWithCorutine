@@ -44,7 +44,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
         subscribeToShareLiveData()
         subscribeToNavigationLiveData()
-        subscribeToNetworkLiveData()
         subscribeToViewLiveData()
 
 
@@ -66,9 +65,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(viewModel)
-
-
         sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
+
+        subscribeToNetworkLiveData()
     }
 
 
