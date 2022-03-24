@@ -9,10 +9,12 @@ import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponse
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainRepository
 import com.daniyalirfan.kotlinbasewithcorutine.utils.NetworkHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class FirstViewModel @ViewModelInject constructor(
+@HiltViewModel
+class FirstViewModel @Inject constructor(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
