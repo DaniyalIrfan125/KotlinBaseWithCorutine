@@ -6,7 +6,10 @@ import com.daniyalirfan.kotlinbasewithcorutine.constants.AppConstants
 import com.daniyalirfan.kotlinbasewithcorutine.data.local.db.AppDao
 import com.daniyalirfan.kotlinbasewithcorutine.data.local.db.AppDatabase
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.ApiService
-import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainRepository
+import com.daniyalirfan.kotlinbasewithcorutine.data.repository.NoteRepositoryImpl
+import com.daniyalirfan.kotlinbasewithcorutine.domain.repository.NoteRepository
+import com.daniyalirfan.kotlinbasewithcorutine.domain.usecases.NoteUseCase
+import com.daniyalirfan.kotlinbasewithcorutine.utils.NetworkHelper
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -61,9 +64,6 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRepository(apiService: ApiService,
-                          localDataSource: AppDao
-    ) =
-        MainRepository(apiService, localDataSource)
+    fun provideNoteUseCase(noteRepository: NoteRepositoryImpl,networkHelper: NetworkHelper) = NoteUseCase(noteRepository,networkHelper)
 
 }

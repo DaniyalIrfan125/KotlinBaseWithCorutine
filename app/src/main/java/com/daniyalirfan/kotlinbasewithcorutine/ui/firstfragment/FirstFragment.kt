@@ -1,8 +1,6 @@
 package com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +8,16 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseFragment
 import com.daniyalirfan.kotlinbasewithcorutine.data.local.datastore.DataStoreProvider
 import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponseItem
-import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
+import com.daniyalirfan.kotlinbasewithcorutine.utils.Resource
 import com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.adapter.PostsRecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
