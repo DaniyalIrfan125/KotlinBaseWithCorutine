@@ -60,7 +60,7 @@ class FirstFragment : BaseFragment() {
 
         //Stores the values
         GlobalScope.launch {
-            dataStoreProvider.storeData(false,"daniyal testing")
+            dataStoreProvider.storeData(false,"pull request for daniyal testing ")
         }
     }
 
