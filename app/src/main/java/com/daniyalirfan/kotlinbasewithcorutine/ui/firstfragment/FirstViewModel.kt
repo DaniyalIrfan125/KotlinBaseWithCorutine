@@ -11,6 +11,7 @@ import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainReposi
 import com.daniyalirfan.kotlinbasewithcorutine.utils.NetworkHelper
 import com.daniyalirfan.kotlinbasewithcorutine.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,14 +33,16 @@ class FirstViewModel @Inject constructor(
 
     fun fetchPostsFromApi() {
         viewModelScope.launch {
-            _posts.postValue(Resource.loading(null))
+            _posts.postValue(Resource.loading())
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.getPosts().let {
-                    if (it.isSuccessful) {
+                mainRepository.getPosts()
+                    .catch {
+                        _posts.postValue(Resource.error(it.message!!))
+                    }
+                    .collect {
                         _posts.postValue(Resource.success(it.body()!!))
-                    } else _posts.postValue(Resource.error(it.message(), null))
-                }
-            } else _posts.postValue(Resource.error("No internet connection", null))
+                    }
+            } else _posts.postValue(Resource.error("No internet connection"))
         }
     }
 

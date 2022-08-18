@@ -2,6 +2,7 @@ package com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory
 
 import com.daniyalirfan.kotlinbasewithcorutine.data.local.db.AppDao
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.ApiService
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -9,6 +10,7 @@ class MainRepository @Inject constructor(
     localDataSource: AppDao
 ) {
 
-    suspend fun getPosts() = apiService.getPosts()
+
+    suspend fun getPosts()  = flow { emit(apiService.getPosts()) }
 
 }

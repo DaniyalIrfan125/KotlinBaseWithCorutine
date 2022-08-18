@@ -113,28 +113,28 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
 
-        mViewModel.postsData.observe(this, Observer {
-            when (it.status) {
-                Resource.Status.SUCCESS -> {
+        mViewModel.postsData.observe(this) {
+            when (it) {
+                is Resource.Success -> {
                     hideProgressBar()
-                    it.data?.let {
+                    it.data.let {
                         postsList.addAll(it)
                         adapter.notifyDataSetChanged()
                     }
 
                 }
-                Resource.Status.LOADING -> {
+                is Resource.Loading -> {
                     showProgressBar()
                 }
-                Resource.Status.ERROR -> {
+                is Resource.Error -> {
                     hideProgressBar()
 
-                    Snackbar.make(recycler_posts!!, it.message!!, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(recycler_posts!!, it.message, Snackbar.LENGTH_SHORT)
                         .show()
 
                 }
             }
-        })
+        }
     }
 
 
