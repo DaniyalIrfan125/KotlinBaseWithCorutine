@@ -4,6 +4,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.daniyalirfan.kotlinbasewithcorutine.MainApplication
+import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseViewModel
 import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponse
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
@@ -40,9 +42,13 @@ class FirstViewModel @Inject constructor(
                         _posts.postValue(Resource.error(it.message!!))
                     }
                     .collect {
-                        _posts.postValue(Resource.success(it.body()!!))
+                        if (it.isSuccessful) {
+                            _posts.postValue(Resource.success(it.body()!!))
+                        } else {
+                            _posts.postValue(Resource.error(it.message()))
+                        }
                     }
-            } else _posts.postValue(Resource.error("No internet connection"))
+            } else _posts.postValue(Resource.error(MainApplication.applicationContext.getString(R.string.no_internet_connection)))
         }
     }
 
