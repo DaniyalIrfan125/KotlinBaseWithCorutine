@@ -11,6 +11,6 @@ class MainRepository @Inject constructor(
 ) {
 
 
-    suspend fun getPosts()  = flow { emit(apiService.getPosts()) }
+     fun getPosts()  = flow { emit(apiService.getPosts()) }
 
 }
