@@ -18,7 +18,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     lateinit var sharedViewModel: SharedViewModel
 
     private var mActivity: BaseActivity<*, *>? = null
-    private lateinit var mViewDataBinding: T
+    protected lateinit var mViewDataBinding: T
     protected lateinit var mViewModel: V
 
     abstract val layoutId: Int

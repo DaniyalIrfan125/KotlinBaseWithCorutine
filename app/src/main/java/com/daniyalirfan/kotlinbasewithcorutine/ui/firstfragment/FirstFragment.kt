@@ -1,18 +1,11 @@
 package com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.daniyalirfan.kotlinbasewithcorutine.BR
 import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseFragment
@@ -23,8 +16,6 @@ import com.daniyalirfan.kotlinbasewithcorutine.databinding.FirstFragmentBinding
 import com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.adapter.PostsRecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.first_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -95,7 +86,7 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
         adapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
             override fun onClicked(position: Int) {
-                Navigation.findNavController(recycler_posts)
+                Navigation.findNavController(mViewDataBinding.recyclerPosts)
                     .navigate(R.id.action_firstFragment_to_secondFragment)
             }
 
@@ -104,8 +95,8 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
         })
 
-        recycler_posts.layoutManager = LinearLayoutManager(requireContext())
-        recycler_posts.adapter = adapter
+        mViewDataBinding.recyclerPosts.layoutManager = LinearLayoutManager(requireContext())
+        mViewDataBinding.recyclerPosts.adapter = adapter
 
     }
 
@@ -123,13 +114,15 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
                     }
 
                 }
+
                 is Resource.Loading -> {
                     showProgressBar()
                 }
+
                 is Resource.Error -> {
                     hideProgressBar()
 
-                    Snackbar.make(recycler_posts!!, it.message, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(mViewDataBinding.recyclerPosts, it.message, Snackbar.LENGTH_SHORT)
                         .show()
 
                 }
