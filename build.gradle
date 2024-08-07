@@ -5,10 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.46.1'
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.51.1'
+        classpath 'com.android.tools.build:gradle:8.5.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.21.0"
+        classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.0.0-1.0.22"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,8 +25,8 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
 }
 
 apply plugin: "io.gitlab.arturbosch.detekt"

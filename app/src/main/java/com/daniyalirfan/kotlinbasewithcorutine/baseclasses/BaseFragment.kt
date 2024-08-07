@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.daniyalirfan.kotlinbasewithcorutine.ui.activity.MainActivity
+import com.daniyalirfan.kotlinbasewithcorutine.presentation.activity.mainactivity.MainActivity
 import com.daniyalirfan.kotlinbasewithcorutine.SharedViewModel
 
 

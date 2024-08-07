@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.daniyalirfan.kotlinbasewithcorutine.ui.activity.MainViewModel" />
+            type="com.daniyalirfan.kotlinbasewithcorutine.presentation.activity.mainactivity.MainViewModel" />
 
     </data>
 
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".presentation.activity.mainactivity.MainActivity">
 
 
     <androidx.fragment.app.FragmentContainerView

@@ -1,4 +1,4 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -9,7 +9,7 @@ import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseViewModel
 import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponse
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
-import com.daniyalirfan.kotlinbasewithcorutine.data.remote.reporitory.MainRepository
+import com.daniyalirfan.kotlinbasewithcorutine.data.remote.repository.MainRepositoryImpl
 import com.daniyalirfan.kotlinbasewithcorutine.utils.NetworkHelper
 import com.daniyalirfan.kotlinbasewithcorutine.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FirstViewModel @Inject constructor(
-    private val mainRepository: MainRepository,
+    private val mainRepository: MainRepositoryImpl,
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
@@ -30,7 +30,7 @@ class FirstViewModel @Inject constructor(
 
     val myName = ObservableField<String>()
     val myedittext = ObservableField<String>()
-    val btnClick = SingleLiveEvent<Any>()
+    val btnClick = SingleLiveEvent<Boolean>()
 
 
     fun fetchPostsFromApi() {
@@ -53,7 +53,7 @@ class FirstViewModel @Inject constructor(
     }
 
     fun onClick() {
-        btnClick.call()
+        btnClick.value = true
     }
 
 }

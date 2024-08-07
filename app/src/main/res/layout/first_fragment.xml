@@ -5,14 +5,14 @@
 
         <variable
             name="viewModel"
-            type="com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.FirstViewModel" />
+            type="com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment.FirstViewModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.firstfragment.FirstFragment">
+        tools:context=".presentation.fragments.firstfragment.FirstFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_posts"

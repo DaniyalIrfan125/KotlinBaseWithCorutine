@@ -1,9 +1,8 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.activity
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.activity.mainactivity
 
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
-import androidx.databinding.DataBindingUtil.setContentView
 import com.daniyalirfan.kotlinbasewithcorutine.BR
 import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseActivity

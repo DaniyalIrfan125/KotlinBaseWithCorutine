@@ -1,4 +1,4 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.adapter
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.View

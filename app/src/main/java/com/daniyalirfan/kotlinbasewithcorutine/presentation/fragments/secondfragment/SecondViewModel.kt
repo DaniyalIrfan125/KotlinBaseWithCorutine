@@ -1,4 +1,4 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.secondfragment
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.secondfragment
 
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseViewModel
 

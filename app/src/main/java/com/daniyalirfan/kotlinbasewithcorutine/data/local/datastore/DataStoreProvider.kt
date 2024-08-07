@@ -8,15 +8,21 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.daniyalirfan.kotlinbasewithcorutine.constants.AppConstants
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DataStoreProvider(val context: Context) {
+@Singleton
+class DataStoreProvider @Inject constructor(@ApplicationContext context: Context) {
 
     //Create the dataStore
-    private val Context.userPreferencesDataStore: DataStore<Preferences> by preferencesDataStore(
+    private val Context.userPreferencesDataStore by preferencesDataStore(
         name = AppConstants.DataStore.DATA_STORE_NAME
     )
+
+    val dataStore = context.userPreferencesDataStore
 
 
     //Create some keys
@@ -28,7 +34,7 @@ class DataStoreProvider(val context: Context) {
 
     //Store data
     suspend fun storeData(isLocalizationKey: Boolean, name: String) {
-        context.userPreferencesDataStore.edit {
+        dataStore.edit {
             it[IS_LOCALIZATION_KEY] = isLocalizationKey
             it[USER_NAME_KEY] = name
         }

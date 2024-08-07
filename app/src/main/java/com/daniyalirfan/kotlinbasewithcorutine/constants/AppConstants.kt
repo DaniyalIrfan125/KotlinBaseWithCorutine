@@ -1,5 +1,6 @@
 package com.daniyalirfan.kotlinbasewithcorutine.constants
 
+import androidx.annotation.LongDef
 import androidx.annotation.StringDef
 
 
@@ -16,6 +17,14 @@ object AppConstants {
     annotation class DbConfiguration {
         companion object {
             const val DB_NAME = "BaseProject"
+        }
+    }
+
+
+    @LongDef(Chucker.CONTENT_LENGTH)
+    annotation class Chucker {
+        companion object {
+            const val CONTENT_LENGTH = 250_000L
         }
     }
 

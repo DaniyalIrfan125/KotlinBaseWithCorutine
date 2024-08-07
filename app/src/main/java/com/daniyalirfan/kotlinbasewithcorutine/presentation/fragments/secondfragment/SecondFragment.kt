@@ -1,10 +1,10 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.secondfragment
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.secondfragment
 
 import com.daniyalirfan.kotlinbasewithcorutine.BR
 import com.daniyalirfan.kotlinbasewithcorutine.R
 import com.daniyalirfan.kotlinbasewithcorutine.baseclasses.BaseFragment
 import com.daniyalirfan.kotlinbasewithcorutine.databinding.LayoutSecondBinding
-import com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.FirstViewModel
+import com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment.FirstViewModel
 
 class SecondFragment : BaseFragment<LayoutSecondBinding, SecondViewModel>() {
 

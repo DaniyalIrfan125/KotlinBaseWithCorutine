@@ -1,9 +1,10 @@
-package com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment
+package com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daniyalirfan.kotlinbasewithcorutine.BR
@@ -13,11 +14,12 @@ import com.daniyalirfan.kotlinbasewithcorutine.data.local.datastore.DataStorePro
 import com.daniyalirfan.kotlinbasewithcorutine.data.models.PostsResponseItem
 import com.daniyalirfan.kotlinbasewithcorutine.data.remote.Resource
 import com.daniyalirfan.kotlinbasewithcorutine.databinding.FirstFragmentBinding
-import com.daniyalirfan.kotlinbasewithcorutine.ui.firstfragment.adapter.PostsRecyclerAdapter
+import com.daniyalirfan.kotlinbasewithcorutine.presentation.fragments.firstfragment.adapter.PostsRecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
@@ -31,14 +33,12 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
 
     private lateinit var adapter: PostsRecyclerAdapter
     private var postsList: ArrayList<PostsResponseItem> = ArrayList()
+
+    @Inject
     lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //Get reference to our Data Store Provider class
-        dataStoreProvider = DataStoreProvider(requireContext())
-
 
         subscribeToObserveDataStore()
 
@@ -55,29 +55,46 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
     override fun subscribeToViewLiveData() {
         super.subscribeToViewLiveData()
 
-        mViewModel.btnClick.observe(this, Observer {
+//        mViewDataBinding.btn.setOnClickListener {
+//            //observing data from edittext
+//            mViewModel.myedittext.get()?.let {
+//
+//                //setting data to textview
+//                mViewModel.myName.set(it)
+//
+//                //saving data to data store
+//                //Stores the values
+//                lifecycleScope.launch {
+//                    dataStoreProvider.storeData(false, it)
+//                }
+//            }
+//        }
+        mViewModel.btnClick.observe(viewLifecycleOwner) {
+            if (it) {
+                //observing data from edittext
+                mViewModel.myedittext.get()?.let {
 
-            //observing data from edittext
-            mViewModel.myedittext.get()?.let {
+                    //setting data to textview
+                    mViewModel.myName.set(it)
 
-                //setting data to textview
-                mViewModel.myName.set(it)
+                    //saving data to data store
+                    //Stores the values
+                    lifecycleScope.launch {
+                        dataStoreProvider.storeData(false, it)
+                    }
 
-                //saving data to data store
-                //Stores the values
-                GlobalScope.launch {
-                    dataStoreProvider.storeData(false, it)
+
                 }
             }
-        })
+        }
     }
 
     private fun subscribeToObserveDataStore() {
 
         //observing data from data store and showing
-        dataStoreProvider.userNameFlow.asLiveData().observe(this, Observer {
+        dataStoreProvider.userNameFlow.asLiveData().observe(this) {
             mViewModel.myName.set(it)
-        })
+        }
 
     }
 
