@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.daniyalirfan.kotlinbasewithcorutine.presentation.activity.mainactivity.MainActivity
 import com.daniyalirfan.kotlinbasewithcorutine.SharedViewModel
@@ -64,8 +65,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(viewModel)
-        sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
+        mViewModel = ViewModelProvider(this)[viewModel]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         subscribeToNetworkLiveData()
     }

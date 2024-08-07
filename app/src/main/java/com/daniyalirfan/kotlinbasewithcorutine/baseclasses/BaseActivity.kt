@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.daniyalirfan.kotlinbasewithcorutine.SharedViewModel
 
@@ -45,7 +46,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
      */
     private fun databindingWithViewModel() {
         mViewDataBinding = DataBindingUtil.setContentView(this, layoutId)
-        mViewModel = ViewModelProviders.of(this).get(viewModel)
+        mViewModel = ViewModelProvider(this)[viewModel]
         mViewDataBinding.setVariable(bindingVariable, mViewModel)
         mViewDataBinding.executePendingBindings()
 
