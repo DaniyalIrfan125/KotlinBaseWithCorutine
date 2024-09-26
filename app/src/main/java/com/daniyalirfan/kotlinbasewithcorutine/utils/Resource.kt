@@ -1,4 +1,4 @@
-package com.daniyalirfan.kotlinbasewithcorutine.data.remote
+package com.daniyalirfan.kotlinbasewithcorutine.utils
 
 
 
